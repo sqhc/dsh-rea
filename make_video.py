@@ -7,6 +7,7 @@ Uses OpenCV to create frames with bilingual (Chinese/English) text.
 import cv2
 import numpy as np
 import os
+from pathlib import Path
 
 # Video settings
 WIDTH = 1280
@@ -443,7 +444,7 @@ def scene_outro(writer, start_frame, end_frame):
 # ==================== MAIN ====================
 
 def main():
-    output_path = "/Users/shenqing/Desktop/Deepseek Harness/dsh-rea/promo.mp4"
+    output_path = str(Path(__file__).resolve().parent / "promo.mp4")
     
     # Try H264 first, fallback to MP4V
     fourcc = cv2.VideoWriter_fourcc(*'avc1')

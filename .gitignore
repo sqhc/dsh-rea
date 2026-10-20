@@ -2,3 +2,13 @@ node_modules/
 .DS_Store
 *.log
 npm-debug.log*
+
+# Local monitoring and dsh-ops transient state
+.dsh-ops-update-*.lock
+.monitor/
+logs/
+.post-restart-check.txt
+
+# Python helper cache
+__pycache__/
+*.pyc

@@ -340,7 +340,7 @@ def render_frame(frame_idx):
 
 def create_video():
     """Generate video frames and encode"""
-    output_dir = Path("/Users/shenqing/Desktop/Deepseek Harness/dsh-rea")
+    output_dir = Path(__file__).resolve().parent
     mp4_path = output_dir / "promo.mp4"
     webm_path = output_dir / "promo.webm"
     gif_path = output_dir / "promo.gif"

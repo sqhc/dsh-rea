@@ -7,12 +7,14 @@
 
 import { spawn } from "node:child_process";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 
-const CORDIS_PATCH = "/Users/shenqing/Desktop/Deepseek Harness/dsh-rea/cordis.patch.yml";
-const MONITOR_DIR = "/Users/shenqing/Desktop/Deepseek Harness/dsh-rea/.monitor";
-const BASELINE_FILE = "/Users/shenqing/Desktop/Deepseek Harness/dsh-rea/monitoring-baseline.md";
+const ROOT = join(import.meta.dirname, "..");
+const CORDIS_PATCH = join(ROOT, "cordis.patch.yml");
+const MONITOR_DIR = join(ROOT, ".monitor");
+const BASELINE_FILE = join(ROOT, "monitoring-baseline.md");
+const NODE_BIN_DIR = dirname(process.execPath);
 
 async function runCommand(cmd, args, options = {}) {
   return new Promise((resolve, reject) => {
@@ -70,7 +72,7 @@ async function getGitHubReleases() {
 async function runPreflight() {
   const env = {
     ...process.env,
-    PATH: "/Users/shenqing/.nvm/versions/node/v24.21.0/bin:" + process.env.PATH,
+    PATH: NODE_BIN_DIR + ":" + process.env.PATH,
     DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache"
   };
   try {

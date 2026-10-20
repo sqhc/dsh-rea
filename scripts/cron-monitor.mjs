@@ -11,10 +11,10 @@
 
 import { spawn } from "node:child_process";
 import { readFile, writeFile, mkdir, readdir } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 
-const REPO_ROOT = "/Users/shenqing/Desktop/Deepseek Harness/dsh-rea";
+const REPO_ROOT = join(import.meta.dirname, "..");
 const LOGS_DIR = join(REPO_ROOT, "logs");
 const CORDIS_PATCH = join(REPO_ROOT, "cordis.patch.yml");
 
@@ -55,7 +55,7 @@ async function getLastMonitoredVersion() {
 async function runPreflight() {
   const env = {
     ...process.env,
-    PATH: "/Users/shenqing/.nvm/versions/node/v24.21.0/bin:" + process.env.PATH,
+    PATH: dirname(process.execPath) + ":" + process.env.PATH,
     DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache"
   };
   return runCommand("node", ["scripts/preflight.mjs"], { env, timeout: 300000 });

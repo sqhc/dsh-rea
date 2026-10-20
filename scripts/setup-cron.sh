@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-REPO_ROOT="/Users/shenqing/Desktop/Deepseek Harness/dsh-rea"
-NODE_PATH="/Users/shenqing/.nvm/versions/node/v24.21.0/bin"
+REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+NODE_PATH="$(dirname "$(command -v node)")"
 MONITOR_SCRIPT="$REPO_ROOT/scripts/monitor-upstream.mjs"
 PREFLIGHT_SCRIPT="$REPO_ROOT/scripts/run-preflight-scheduled.mjs"
 LOG_DIR="$REPO_ROOT/logs"

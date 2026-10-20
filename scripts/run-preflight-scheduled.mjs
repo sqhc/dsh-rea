@@ -15,10 +15,11 @@
 
 import { spawn } from "node:child_process";
 import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
+import { dirname, join } from "node:path";
 import { homedir } from "node:os";
 
 const ROOT = join(import.meta.dirname, "..");
+const NODE_BIN_DIR = dirname(process.execPath);
 const PREFLIGHT_SCRIPT = join(ROOT, "scripts/preflight.mjs");
 const BASELINE_FILE = join(ROOT, "monitoring-baseline.md");
 const LOGS_DIR = join(ROOT, "logs");
@@ -37,7 +38,7 @@ function parseArgs() {
 async function runPreflight() {
   const env = {
     ...process.env,
-    PATH: "/Users/shenqing/.nvm/versions/node/v24.21.0/bin:" + process.env.PATH,
+    PATH: NODE_BIN_DIR + ":" + process.env.PATH,
     DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache",
   };
 
