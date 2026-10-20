@@ -3,11 +3,11 @@
 </p>
 
 <p align="center">
-  <video width="100%" max-width="720" controls preload="metadata" poster="promo-poster.png">
-    <source src="promo.webm" type="video/webm">
-    <source src="promo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+  <a href="promo.mp4">
+    <img src="promo.gif" alt="dsh-rea promo video" width="720">
+  </a>
+  <br>
+  <sub><a href="promo.mp4">MP4</a> · <a href="promo.webm">WebM</a> · <a href="promo-poster.png">Poster</a></sub>
   <br>
   <sub>🇨🇳 <a href="README.zh.md">中文版</a> | 🇺🇸 English</sub>
 </p>
