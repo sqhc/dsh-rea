@@ -14,7 +14,7 @@
 
 # dsh-rea
 
-[English](README.md) | 简体中文
+[English](README.md) | 简体中文 · [Releases](https://github.com/sqhc/dsh-rea/releases) · [更新日志](CHANGELOG.md)
 
 > **非官方项目。** 本仓库是一个独立的 DeepSeek Harness 插件包，与 REA 项目没有隶属、
 > 背书或发布关系。仓库不包含 REA 源码：运行时从 npm 安装官方

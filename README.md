@@ -14,7 +14,7 @@
 
 # dsh-rea
 
-English | [简体中文](README.zh.md)
+English | [简体中文](README.zh.md) · [Releases](https://github.com/sqhc/dsh-rea/releases) · [Changelog](CHANGELOG.md)
 
 > **Unofficial.** This repository is an independent DeepSeek Harness bundle. It is
 > not affiliated with, endorsed by, or published by the REA project. It contains
