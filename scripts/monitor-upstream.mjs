@@ -95,7 +95,7 @@ function parsePreflight(output) {
 
 async function generateReport(current, latest, dshClient, preflight, ghRelease) {
   const date = new Date().toISOString().split("T")[0];
-  const hasChanges = current !== latest.rea || current !== ghRelease?.tag?.replace("rea-agents-", "");
+  const hasChanges = current !== latest.rea || (ghRelease && current !== ghRelease.tag?.replace("rea-agents-", ""));
   
   let report = `# 上游监控日报 ${date}\n\n`;
   report += `**检查时间**: ${new Date().toLocaleString()}\n\n`;
@@ -110,7 +110,7 @@ async function generateReport(current, latest, dshClient, preflight, ghRelease) 
   if (hasChanges) {
     report += `⚠️ **检测到版本差异**\n\n`;
     if (current !== latest.rea) {
-      report += `- rea-agents: ${current} → ${latest.era} (${latest.rea > current ? "可升级" : "版本回退"})\n`;
+      report += `- rea-agents: ${current} → ${latest.rea} (${latest.rea > current ? "可升级" : "版本回退"})\n`;
     }
     if (ghRelease && current !== ghRelease.tag.replace("rea-agents-", "")) {
       report += `- GitHub 有新 release: ${ghRelease.tag} (${ghRelease.date})\n`;

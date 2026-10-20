@@ -1,6 +1,6 @@
 # 上游监控日报 2026-10-20
 
-**检查时间**: 10/19/2026, 11:11:32 PM
+**检查时间**: 10/19/2026, 11:12:49 PM
 
 ## 版本对比
 
@@ -11,17 +11,18 @@
 
 ## 变更评估
 
-⚠️ **检测到版本差异**
-
+✅ 无版本变化，保持当前锁定版本 6.7.0
 
 ## Preflight 基线对比
 
-❌ Preflight 失败: FAIL: node exited 1: FAIL npm cache /Users/shenqing/.dsh/cache/dsh-rea/npm is not writable: EPERM: operation not permitted, open '/Users/shenqing/.dsh/cache/dsh-rea/npm/.dsh-rea-write-test-89422'
-  Set DSH_REA_NPM_CACHE to a writable directory and retry.
+| 指标 | Baseline | 当前 | 变化 |
+|------|----------|------|------|
+| 工具数 | 207 | 207 | +0 |
+| Catalog | 214.1 KiB | 214.1 KiB | 0.0 KiB |
+| REA 版本 | 6.7.0 | 6.7.0 | 同步 |
 
+✅ 基线一致
 
 ## 建议行动
 
-1. **创建评估 PR**：更新 cordis.patch.yml 和 preflight.mjs 中的版本号
-2. **Team Lead 审批**：决定是否跟随、跳过中间版本
-3. **合并后回归**：跑 preflight 对比 baseline
+1. 保持现状，下次定时检查再评估

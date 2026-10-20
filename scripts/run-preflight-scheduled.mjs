@@ -38,7 +38,7 @@ async function runPreflight() {
   const env = {
     ...process.env,
     PATH: "/Users/shenqing/.nvm/versions/node/v24.21.0/bin:" + process.env.PATH,
-    DSH_REA_NPM_CACHE: join(homedir(), ".dsh", "cache", "dsh-rea", "npm"),
+    DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache",
   };
 
   return new Promise((resolve, reject) => {
