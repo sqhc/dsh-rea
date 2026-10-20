@@ -6,6 +6,11 @@
 endorsed by, sponsored by, or published by the REA project or its maintainers.
 The names "REA" and "Reverse Engineer Anything" refer to the upstream project.
 
+This integration is maintained at <https://github.com/sqhc/dsh-rea> by
+[sqhc](https://github.com/sqhc). It packages the `rea-mcp` registration that
+REA's own `rea setup --client dsh` writes into an installable DSH bundle; it is
+not a fork of REA.
+
 ## Upstream project
 
 - Project: REA — Reverse Engineer Anything

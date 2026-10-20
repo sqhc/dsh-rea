@@ -1,4 +1,10 @@
+<p align="center">
+  <img src="icon.svg" alt="dsh-rea 图标" width="96" height="96">
+</p>
+
 # dsh-rea
+
+[English](README.md) | 简体中文
 
 > **非官方项目。** 本仓库是一个独立的 DeepSeek Harness 插件包，与 REA 项目没有隶属、
 > 背书或发布关系。仓库不包含 REA 源码：运行时从 npm 安装官方
@@ -9,6 +15,20 @@
 插件，用于连接 REA 逆向工程 MCP 服务器。安装后，智能体可以像调用原生工具一样调用
 `mcp__rea__<tool>`：分析原生二进制、应用包、JavaScript/Electron 应用、托管程序集、
 网站、流量抓包、固件镜像和运行时行为。
+
+## 项目来源与归属
+
+- **上游项目：** [REA — Reverse Engineer Anything](https://github.com/morluto/rea)，
+  作者 **morluto**，MIT 许可。npm 包为
+  [`rea-agents`](https://www.npmjs.com/package/rea-agents)，文档在
+  [rea.tools](https://rea.tools/)。
+- **本仓库：** <https://github.com/sqhc/dsh-rea>，由
+  [sqhc](https://github.com/sqhc) 维护。这里只做打包与接入，不是 REA 的分叉。
+- **关系：** 非官方集成。它把 REA 自带的 `rea setup --client dsh` 所写入的
+  `rea-mcp` 注册，封装成一个带本地化元数据和图标的可安装 DSH bundle。仓库不复制
+  REA 的源码、二进制或素材；运行时从 npm 获取官方包。
+- **打包契约：** DeepSeek Harness 的 `dsh.bundle.patch` 格式，以及 Harness 自带的
+  `@deepseek-ai/dsh-mcp-client`。
 
 ## 这个插件实际做了什么
 

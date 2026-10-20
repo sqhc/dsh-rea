@@ -1,4 +1,10 @@
+<p align="center">
+  <img src="icon.svg" alt="dsh-rea icon" width="96" height="96">
+</p>
+
 # dsh-rea
+
+English | [简体中文](README.zh.md)
 
 > **Unofficial.** This repository is an independent DeepSeek Harness bundle. It is
 > not affiliated with, endorsed by, or published by the REA project. It contains
@@ -11,6 +17,21 @@ bundle that connects the REA reverse-engineering MCP server. Once installed, the
 agent can call REA tools as `mcp__rea__<tool>` — inspect native binaries, app
 bundles, JavaScript/Electron applications, managed assemblies, websites, packet
 captures, firmware images, and runtime behavior.
+
+## Origin and provenance
+
+- **Upstream project:** [REA — Reverse Engineer Anything](https://github.com/morluto/rea)
+  by **morluto**, MIT-licensed. The npm package is
+  [`rea-agents`](https://www.npmjs.com/package/rea-agents); documentation lives at
+  [rea.tools](https://rea.tools/).
+- **This repository:** <https://github.com/sqhc/dsh-rea>, maintained by
+  [sqhc](https://github.com/sqhc). It is a packaging layer, not a fork.
+- **Relationship:** unofficial integration. It turns the `rea-mcp` registration
+  that REA's own `rea setup --client dsh` writes into an installable DSH bundle
+  with locale metadata and an icon. No REA source code, binaries, or artwork are
+  copied; the official package is fetched from npm at runtime.
+- **Packaging contract:** DeepSeek Harness's `dsh.bundle.patch` format and the
+  harness-shipped `@deepseek-ai/dsh-mcp-client`.
 
 ## What this bundle actually does
 
