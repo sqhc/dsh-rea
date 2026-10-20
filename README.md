@@ -100,7 +100,7 @@ Edit `cordis.patch.yml` in the checkout and reinstall/reload the bundle.
 | `serverName` | `rea` | Tool prefix `mcp__rea__` |
 | `toolCallTimeoutMs` | `600000` | Native analysis and provider startup can exceed the 60 s default |
 | `failOnStartupError` | `false` | A slow first npx download should reconnect, not fail the row |
-| `NPM_CONFIG_CACHE` | `!!js` → `<profile>/cache/dsh-rea/npm` | Avoid `EPERM` from a root-owned `~/.npm`; override with `DSH_REA_NPM_CACHE` |
+| `NPM_CONFIG_CACHE` | `!!js` → `$DSH_HOME/cache/dsh-rea/npm` | Avoid `EPERM` from a root-owned `~/.npm`; override with `DSH_REA_NPM_CACHE` |
 | `REA_MCP_INPUT_SCHEMA_PROFILE` | `compact` | Keep the advertised catalog bounded |
 | `REA_MCP_OUTPUT_SCHEMA_PROFILE` | `off` | Remove multi-megabyte output schemas |
 
@@ -108,9 +108,10 @@ Edit `cordis.patch.yml` in the checkout and reinstall/reload the bundle.
 
 ### `npm error code EPERM` / root-owned npm cache
 
-The `NPM_CONFIG_CACHE` expression in the patch points npx at a cache under the
-active profile directory (`<profile>/cache/dsh-rea/npm`), falling back to
-`$DSH_HOME/cache/dsh-rea/npm` and then `~/.dsh/cache/dsh-rea/npm`. If you need a
+The `NPM_CONFIG_CACHE` expression in the patch points npx at
+`$DSH_HOME/cache/dsh-rea/npm` (or `<profile>/cache/dsh-rea/npm` when the profile
+directory is available), falling back to `~/.dsh/cache/dsh-rea/npm`. In the
+verified Desktop profile it resolved to `~/.dsh/cache/dsh-rea/npm`. If you need a
 different directory, set `DSH_REA_NPM_CACHE` in the environment of the Harness
 process (requires a Harness restart), or replace the `!!js` expression with a
 literal path. We do not recommend `sudo chown -R` on your whole npm cache just

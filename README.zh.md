@@ -91,7 +91,7 @@ deepseek-flash 的 1M 上下文来说可以接受，但这是插件启用期间�
 | `serverName` | `rea` | 工具前缀为 `mcp__rea__` |
 | `toolCallTimeoutMs` | `600000` | 原生分析和 provider 启动可能远超默认 60 秒 |
 | `failOnStartupError` | `false` | 首次 npx 下载慢时应重连，而不是让插件行失败 |
-| `NPM_CONFIG_CACHE` | `!!js` → `<profile>/cache/dsh-rea/npm` | 避开 root 属主 `~/.npm` 导致的 `EPERM`；可用 `DSH_REA_NPM_CACHE` 覆盖 |
+| `NPM_CONFIG_CACHE` | `!!js` → `$DSH_HOME/cache/dsh-rea/npm` | 避开 root 属主 `~/.npm` 导致的 `EPERM`；可用 `DSH_REA_NPM_CACHE` 覆盖 |
 | `REA_MCP_INPUT_SCHEMA_PROFILE` | `compact` | 控制公布 schema 的大小 |
 | `REA_MCP_OUTPUT_SCHEMA_PROFILE` | `off` | 去掉数 MB 的 output schema |
 
@@ -99,12 +99,12 @@ deepseek-flash 的 1M 上下文来说可以接受，但这是插件启用期间�
 
 ### `npm error code EPERM` / npm 缓存被 root 占用
 
-patch 中的 `NPM_CONFIG_CACHE` 表达式会把 npx 缓存指到当前 profile 目录下的
-`<profile>/cache/dsh-rea/npm`；如果取不到 profile 目录，则回退到
-`$DSH_HOME/cache/dsh-rea/npm`，再回退到 `~/.dsh/cache/dsh-rea/npm`。如果要用别的
-目录，可以在 Harness 进程环境中设置 `DSH_REA_NPM_CACHE`（需要重启 Harness），或把
-`!!js` 表达式换成字面量路径。不建议为了这个插件对整个 npm 缓存执行
-`sudo chown -R`。
+patch 中的 `NPM_CONFIG_CACHE` 表达式会把 npx 缓存指到
+`$DSH_HOME/cache/dsh-rea/npm`（如果取得到 profile 目录则优先
+`<profile>/cache/dsh-rea/npm`），再回退到 `~/.dsh/cache/dsh-rea/npm`。在已验证的
+Desktop profile 中实际解析为 `~/.dsh/cache/dsh-rea/npm`。如果要用别的目录，可以在
+Harness 进程环境中设置 `DSH_REA_NPM_CACHE`（需要重启 Harness），或把 `!!js`
+表达式换成字面量路径。不建议为了这个插件对整个 npm 缓存执行 `sudo chown -R`。
 
 ### 看不到 `mcp__rea__*` 工具
 
