@@ -1,0 +1,35 @@
+{
+  "name": "dsh-rea",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Unofficial DeepSeek Harness bundle that connects the REA reverse-engineering MCP server.",
+  "license": "MIT",
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "mcp",
+    "rea",
+    "reverse-engineering"
+  ],
+  "exports": {
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "NOTICE.md",
+    "scripts/preflight.mjs"
+  ],
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "REA Reverse Engineering",
+    "description": "Connects the unofficial REA MCP server so the agent can inspect binaries, applications, and runtime behavior."
+  }
+}

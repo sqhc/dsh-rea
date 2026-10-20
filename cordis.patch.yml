@@ -1,0 +1,28 @@
+# DSH bundle patch: connect the official REA MCP server over stdio.
+#
+# REA is installed at launch time from the exact npm version below; this bundle
+# contains no REA source code. Keep the version pinned so tool names and schemas
+# stay stable until you deliberately upgrade.
+#
+# NPM_CONFIG_CACHE points npm/npx at a writable cache directory. The default
+# ~/.npm cache can contain root-owned files, which makes npx fail with EPERM.
+# The expression prefers the active profile directory (known writable because
+# DSH installs bundles there), then DSH_HOME, then ~/.dsh. Override the location
+# with DSH_REA_NPM_CACHE if needed.
+- insert:
+    - id: rea-mcp
+      name: '@deepseek-ai/dsh-mcp-client'
+      config:
+        serverName: rea
+        transport: stdio
+        command: npx
+        args: ['-y', 'rea-agents@6.7.0', 'mcp']
+        env:
+          NPM_CONFIG_CACHE: !!js "process.env.DSH_REA_NPM_CACHE ?? (((process.env.DSH_PROFILE_DIR ?? (process.env.DSH_HOME ?? ((process.env.HOME ?? process.env.USERPROFILE ?? '/tmp') + '/.dsh'))) + '/cache') + '/dsh-rea/npm')"
+          REA_MCP_INPUT_SCHEMA_PROFILE: 'compact'
+          REA_MCP_OUTPUT_SCHEMA_PROFILE: 'off'
+        # Native analysis (Ghidra, Hopper, IDA) can legitimately run for minutes.
+        toolCallTimeoutMs: 600000
+        # The first launch may download rea-agents; let the reconnect policy
+        # recover instead of failing the whole plugin row on a slow network.
+        failOnStartupError: false
