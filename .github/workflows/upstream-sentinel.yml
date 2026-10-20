@@ -1,0 +1,50 @@
+name: Upstream Dependency Sentinel
+
+on:
+  schedule:
+    # 每天 UTC 时间 00:00 (北京时间 08:00) 自动运行
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 允许你手动点击运行
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check for upstream updates
+        id: check
+        run: |
+          # 获取当前 package.json 中锁定的版本
+          CURRENT_VERSION=$(node -p "require('./package.json').dependencies['rea-agents'] || require('./package.json').devDependencies['rea-agents']" | tr -d '^~')
+          
+          # 从 npm 获取最新版本
+          LATEST_VERSION=$(npm view rea-agents version)
+          
+          echo "Current: $CURRENT_VERSION | Latest: $LATEST_VERSION"
+          
+          if [ "$CURRENT_VERSION" != "$LATEST_VERSION" ]; then
+            echo "outdated=true" >> $GITHUB_OUTPUT
+            echo "latest=$LATEST_VERSION" >> $GITHUB_OUTPUT
+          else
+            echo "outdated=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create Issue if outdated
+        if: steps.check.outputs.outdated == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const latest = "${{ steps.check.outputs.latest }}";
+            github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `🚨 上游依赖更新提醒: rea-agents 发布 v${latest}`,
+              body: `检测到 \`rea-agents\` 发布了新版本 \`v${latest}\`。\n\n**请执行以下操作：**\n1. 查看上游 Release Notes 是否有 breaking changes。\n2. 更新 \`package.json\` 并运行 \`npm install\`。\n3. 运行 \`node scripts/preflight.mjs\` 进行验证。\n4. 测试通过后合并发布。`
+            })
