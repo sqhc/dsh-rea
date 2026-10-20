@@ -2,6 +2,19 @@
   <img src="icon.svg" alt="dsh-rea icon" width="96" height="96">
 </p>
 
+<<<<<<< HEAD
+=======
+<p align="center">
+  <video width="100%" max-width="720" controls preload="metadata" poster="promo-poster.png">
+    <source src="promo.webm" type="video/webm">
+    <source src="promo.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <br>
+  <sub>🇨🇳 <a href="README.zh.md">中文版</a> | 🇺🇸 English</sub>
+</p>
+
+>>>>>>> Initial: baseline + monitoring + video + compat table
 # dsh-rea
 
 English | [简体中文](README.zh.md)
@@ -62,6 +75,18 @@ rebuilt here — the official npm package runs as a local stdio MCP server.
 - macOS is what this bundle was verified on. Linux should work the same way.
   Windows is untested; native REA providers also have their own prerequisites.
 
+<<<<<<< HEAD
+=======
+## Version compatibility
+
+| REA version | Bundle version | DSH version (verified) | Notes |
+|---|---|---|---|
+| `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | Baseline; 207 tools, compact input schema, output schema off |
+| `rea-agents@6.x.x` | `0.1.x` | `0.2.x` | Patch versions only; pin exact REA version in `cordis.patch.yml` |
+
+*Always read REA release notes before upgrading. Tool names and schemas are part of the model-facing contract.*
+
+>>>>>>> Initial: baseline + monitoring + video + compat table
 ## Install
 
 Clone this repository, then ask the Harness agent to install the bundle

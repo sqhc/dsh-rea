@@ -2,6 +2,19 @@
   <img src="icon.svg" alt="dsh-rea 图标" width="96" height="96">
 </p>
 
+<<<<<<< HEAD
+=======
+<p align="center">
+  <video width="100%" max-width="720" controls preload="metadata" poster="promo-poster.png">
+    <source src="promo.webm" type="video/webm">
+    <source src="promo.mp4" type="video/mp4">
+    您的浏览器不支持视频标签。
+  </video>
+  <br>
+  <sub>🇨🇳 中文版 | 🇺🇸 <a href="README.md">English</a></sub>
+</p>
+
+>>>>>>> Initial: baseline + monitoring + video + compat table
 # dsh-rea
 
 [English](README.md) | 简体中文
@@ -58,6 +71,18 @@
 - 本次验证环境是 macOS。Linux 预期相同；Windows 未验证，且 REA 的原生 provider
   还有各自的前置条件。
 
+<<<<<<< HEAD
+=======
+## 版本兼容性
+
+| REA 版本 | Bundle 版本 | DSH 版本（已验证） | 备注 |
+|---|---|---|---|
+| `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | 基线版本；207 个工具，compact 输入 schema，output schema 关闭 |
+| `rea-agents@6.x.x` | `0.1.x` | `0.2.x` | 仅补丁版本；在 `cordis.patch.yml` 中固定确切 REA 版本 |
+
+*升级前务必阅读 REA 发布说明。工具名和 schema 属于模型可见契约。*
+
+>>>>>>> Initial: baseline + monitoring + video + compat table
 ## 安装
 
 先克隆本仓库，然后让 Harness 中的智能体用 `plugin_manager`
