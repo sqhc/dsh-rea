@@ -2,13 +2,15 @@ name: Upstream Dependency Sentinel
 
 on:
   schedule:
-    # 每天 UTC 时间 00:00 (北京时间 08:00) 自动运行
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 允许你手动点击运行
+    - cron: '0 0 * * *'  # 每天 UTC 00:00 运行
+  workflow_dispatch:      # 允许手动触发
 
 jobs:
   check-version:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write      # 创建 Issue 所需
+      contents: read     # 读取仓库内容所需
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -21,10 +23,10 @@ jobs:
       - name: Check for upstream updates
         id: check
         run: |
-          # 获取当前 package.json 中锁定的版本
+          # 读取 package.json 中锁定的版本
           CURRENT_VERSION=$(node -p "require('./package.json').dependencies['rea-agents'] || require('./package.json').devDependencies['rea-agents']" | tr -d '^~')
           
-          # 从 npm 获取最新版本
+          # 获取 npm 上的最新版本
           LATEST_VERSION=$(npm view rea-agents version)
           
           echo "Current: $CURRENT_VERSION | Latest: $LATEST_VERSION"
@@ -42,7 +44,7 @@ jobs:
         with:
           script: |
             const latest = "${{ steps.check.outputs.latest }}";
-            github.rest.issues.create({
+            await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: `🚨 上游依赖更新提醒: rea-agents 发布 v${latest}`,
