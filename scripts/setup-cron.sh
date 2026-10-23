@@ -12,7 +12,10 @@ REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 NODE_BIN_DIR="$(dirname "$(command -v node)")"
 LOG_DIR="$REPO_ROOT/logs"
 
-CRON_JOB="0 2 * * * cd $REPO_ROOT && export PATH=\"$NODE_BIN_DIR:\$PATH\" && node scripts/monitor-upstream.mjs >> $LOG_DIR/monitor-\$(date +\\%F).log 2>&1"
+CRON_JOB_MONITOR="0 2 * * * cd $REPO_ROOT && export PATH=\"$NODE_BIN_DIR:\$PATH\" && node scripts/monitor-upstream.mjs >> $LOG_DIR/monitor-\$(date +\\%F).log 2>&1"
+
+# 02:30 检查监控报告，若发现版本变化则触发工作流（生成 PR、通知 Chief 审批）
+CRON_JOB_CHECK="30 2 * * * cd $REPO_ROOT && export PATH=\"$NODE_BIN_DIR:\$PATH\" && node scripts/check-monitoring-report.mjs >> $LOG_DIR/check-\$(date +\\%F).log 2>&1"
 
 # crontab -l 在没有任何任务时返回非零（部分实现还输出到 stderr），
 # 且空管道会让 grep 以退出码 1 结束；set -e 下两者都会中断脚本。
@@ -23,7 +26,7 @@ safe_crontab() {
 
 show_cron() {
     local found
-    found="$(safe_crontab | grep -E "dsh-rea|monitor-upstream" || true)"
+    found="$(safe_crontab | grep -E "dsh-rea|monitor-upstream|check-monitoring" || true)"
     echo "当前计划任务:"
     if [ -n "$found" ]; then
         echo "$found"
@@ -35,13 +38,13 @@ show_cron() {
 install_cron() {
     mkdir -p "$LOG_DIR"
     # 移除旧的同名任务后写入新任务（对空 crontab 保持幂等）。
-    { safe_crontab | grep -v "monitor-upstream.mjs" || true; echo "$CRON_JOB"; } | crontab -
-    echo "✅ 已安装每日 02:00 定时任务"
+    { safe_crontab | grep -v -E "monitor-upstream.mjs|check-monitoring-report.mjs" || true; echo "$CRON_JOB_MONITOR"; echo "$CRON_JOB_CHECK"; } | crontab -
+    echo "✅ 已安装每日 02:00 监控 + 02:30 检查报告定时任务"
     show_cron
 }
 
 remove_cron() {
-    { safe_crontab | grep -v "monitor-upstream.mjs" || true; } | crontab -
+    { safe_crontab | grep -v -E "monitor-upstream.mjs|check-monitoring-report.mjs" || true; } | crontab -
     echo "✅ 已移除定时任务"
     show_cron
 }
