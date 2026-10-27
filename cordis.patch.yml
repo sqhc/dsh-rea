@@ -16,7 +16,7 @@
         serverName: rea
         transport: stdio
         command: npx
-        args: ['-y', 'rea-agents@6.7.0', 'mcp']
+        args: ['-y', 'rea-agents@6.8.0', 'mcp']
         env:
           NPM_CONFIG_CACHE: !!js "process.env.DSH_REA_NPM_CACHE ?? (((process.env.DSH_PROFILE_DIR ?? (process.env.DSH_HOME ?? ((process.env.HOME ?? process.env.USERPROFILE ?? '/tmp') + '/.dsh'))) + '/cache') + '/dsh-rea/npm')"
           REA_MCP_INPUT_SCHEMA_PROFILE: 'compact'
