@@ -76,10 +76,33 @@ rebuilt here — the official npm package runs as a local stdio MCP server.
 
 | REA version | Bundle version | DSH version (verified) | Notes |
 |---|---|---|---|
+| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | **Current**; 229 tools, Node 22.23+/24.22+/26+ (excl. 23/25) |
 | `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | Baseline; 207 tools, compact input schema, output schema off |
-| `rea-agents@6.x.x` | `0.1.x` | `0.2.x` | Patch versions only; pin exact REA version in `cordis.patch.yml` |
+| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` | `0.2.x` | Patch versions only; pin exact REA version in `cordis.patch.yml` |
 
 *Always read REA release notes before upgrading. Tool names and schemas are part of the model-facing contract.*
+
+## Release Notes
+
+### v0.2.0 (2026-10-27) — REA 6.8.0
+
+**Changes**
+- Upstream REA updated from 6.7.0 → 6.8.0
+- Tool count: 207 → **229** (+22 new tools: Agent Environments, GPU/BEAM/Python/Unity/Godot/Node.js SEA/devicetree, PE/ELF deep inspection, Retained Summaries)
+- Catalog size: 214 KiB → **295 KiB** (+38%)
+- Max schema (`inspect_analysis_view`): 7.4 KB → **15.2 KB** (2×)
+- Node.js engine requirement tightened: **22.23.4+ / 24.22.1+ / 26.12.1+** (Node 23/25 explicitly unsupported)
+- Bundle size: 28 MB → 49 MB (first `npx` download slower)
+
+**Migration**
+1. Update `cordis.patch.yml`: `rea-agents@6.8.0`
+2. Ensure Node.js ≥ 24.22.1 (or 22.23.4 / 26.12.1) on the Harness PATH
+3. Reinstall/reload bundle and run `node scripts/preflight.mjs`
+
+**Known risks**
+- Windows: untested (known limitation)
+- Node 24.21.x will fail preflight — upgrade Node or pin to 22.23.4+
+- Catalog token cost ~76k tokens (compact input); disable bundle when not reverse-engineering
 
 ## Install
 

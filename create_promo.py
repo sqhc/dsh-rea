@@ -157,9 +157,9 @@ def render_frame(frame_idx):
         
         # Flow diagram: npm → npx → REA MCP → DSH
         boxes = [
-            ("npm", "rea-agents@6.7.0", ACCENT_BLUE),
+            ("npm", "rea-agents@6.8.0", ACCENT_BLUE),
             ("npx", "runs as stdio MCP server", ACCENT_GREEN),
-            ("REA MCP", "207 tools exposed", ACCENT_ORANGE),
+            ("REA MCP", "229 tools exposed", ACCENT_ORANGE),
             ("DSH", "mcp__rea__<tool>", (255, 150, 100)),
         ]
         
@@ -207,16 +207,16 @@ def render_frame(frame_idx):
     elif t < 42:
         p = (t - 28) / 14
         
-        put_text(img, "207 REA Tools → mcp__rea__*", (80, 60), 1.2, ACCENT_ORANGE, 2)
+        put_text(img, "229 REA Tools → mcp__rea__*", (80, 60), 1.2, ACCENT_ORANGE, 2)
         
         # Preflight output simulation
         preflight_lines = [
-            "node 24.21.0: supported",
+            "node 24.23.0: supported",
             "npm cache /tmp/dsh-rea-npm-cache: writable",
-            "REA 6.7.0: handshake ok",
-            "  tools: 207",
-            "  catalog: 214.1 KiB (~55k tokens)",
-            "  largest: inspect_analysis_view (7.4 KB)",
+            "REA 6.8.0: handshake ok",
+            "  tools: 229",
+            "  catalog: 295.1 KiB (~76k tokens)",
+            "  largest: inspect_analysis_view (15.2 KB)",
             "OK",
         ]
         
@@ -247,7 +247,7 @@ def render_frame(frame_idx):
                 "mcp__rea__inspect_managed_members",
                 "mcp__rea__inspect_wasm_artifact",
                 "mcp__rea__trace_native_values",
-                "... and 197 more",
+                "... and 219 more",
             ]
             ex_y = term_y + term_h + 20
             put_text(img, "Example tools:", (term_x, ex_y), 0.7, TEXT_GRAY, 1)
@@ -264,10 +264,10 @@ def render_frame(frame_idx):
         
         # Simulated DSH tool call result
         result_json = """{
-  "serverVersion": "6.7.0",
+  "serverVersion": "6.8.0",
   "provider": "ghidra",
   "capabilities": ["tools", "resources"],
-  "toolsCount": 207
+  "toolsCount": 229
 }"""
         
         # Terminal
@@ -289,7 +289,7 @@ def render_frame(frame_idx):
         
         # Checkmark
         if p > 0.8:
-            put_text(img, "✓ REA 6.7.0 connected · 207 tools ready", 
+            put_text(img, "✓ REA 6.8.0 connected · 229 tools ready", 
                      (term_x + 20, term_y + term_h + 40), 0.7, ACCENT_GREEN, 1)
     
     # ===== SECTION 7: Config & compatibility (52-57s) =====
@@ -299,9 +299,9 @@ def render_frame(frame_idx):
         put_text(img, "Configure via cordis.patch.yml", (80, 60), 1.1, ACCENT_BLUE, 2)
         
         config_items = [
-            ("Version pin", "rea-agents@6.7.0", "Change to upgrade"),
-            ("Node.js", "22.x / 24.x / 26+", "REA official support"),
-            ("Schema profile", "compact (214 KiB)", "full = 3.4 MB"),
+            ("Version pin", "rea-agents@6.8.0", "Change to upgrade"),
+            ("Node.js", "22.23+ / 24.22+ / 26+", "REA official support (excl. 23/25)"),
+            ("Schema profile", "compact (295 KiB)", "full = 3.4 MB"),
             ("Timeout", "600s", "Native analysis needs time"),
         ]
         

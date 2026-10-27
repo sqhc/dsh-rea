@@ -72,10 +72,33 @@
 
 | REA 版本 | Bundle 版本 | DSH 版本（已验证） | 备注 |
 |---|---|---|---|
+| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | **当前**；229 个工具，Node 22.23+/24.22+/26+（排除 23/25） |
 | `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | 基线版本；207 个工具，compact 输入 schema，output schema 关闭 |
-| `rea-agents@6.x.x` | `0.1.x` | `0.2.x` | 仅补丁版本；在 `cordis.patch.yml` 中固定确切 REA 版本 |
+| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` | `0.2.x` | 仅补丁版本；在 `cordis.patch.yml` 中固定确切 REA 版本 |
 
 *升级前务必阅读 REA 发布说明。工具名和 schema 属于模型可见契约。*
+
+## 更新日志
+
+### v0.2.0 (2026-10-27) — REA 6.8.0
+
+**变更点**
+- 上游 REA 从 6.7.0 升级到 6.8.0
+- 工具数量：207 → **229**（新增 22 个工具：Agent Environments、GPU/BEAM/Python/Unity/Godot/Node.js SEA/devicetree、PE/ELF 深度检查、Retained Summaries）
+- Catalog 大小：214 KiB → **295 KiB**（+38%）
+- 最大 schema (`inspect_analysis_view`)：7.4 KB → **15.2 KB**（翻倍）
+- Node.js 引擎要求收紧：**22.23.4+ / 24.22.1+ / 26.12.1+**（明确不支持 Node 23/25）
+- 包体积：28 MB → 49 MB（首次 `npx` 下载变慢）
+
+**迁移指引**
+1. 更新 `cordis.patch.yml`：`rea-agents@6.8.0`
+2. 确保 Harness PATH 上的 Node.js ≥ 24.22.1（或 22.23.4 / 26.12.1）
+3. 重新安装/重载插件并运行 `node scripts/preflight.mjs`
+
+**已知风险**
+- Windows：未测试（已知限制）
+- Node 24.21.x 会导致 preflight 失败 — 升级 Node 或锁定到 22.23.4+
+- Catalog token 成本约 76k（compact 输入）；不做逆向任务时建议禁用插件
 
 ## 安装
 

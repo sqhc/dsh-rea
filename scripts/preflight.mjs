@@ -23,17 +23,18 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-const REA_VERSION = "6.7.0";
+const REA_VERSION = "6.8.0";
 const TIMEOUT_MS = Number(process.env.DSH_REA_PREFLIGHT_TIMEOUT_MS ?? 240_000);
 
 const nodeVersion = process.versions.node;
 const [major, minor] = nodeVersion.split(".").map(Number);
 const nodeSupported =
-  (major === 22 && minor >= 19) || (major === 24 && minor >= 11) || major >= 26;
+  (major === 22 && minor >= 23) || (major === 24 && minor >= 22) || major >= 26;
 
 console.log(`node ${nodeVersion}: ${nodeSupported ? "supported" : "NOT in REA's supported range"}`);
 if (!nodeSupported) {
-  console.log("  REA supports Node 22.x (>=22.19), 24.x (>=24.11), or 26+.");
+  console.log("  REA 6.8.0+ supports Node 22.x (>=22.23), 24.x (>=24.22), or 26+.");
+  console.log("  Node 23.x and 25.x are NOT supported.");
   console.log("  Continuing anyway; some REA tools may fail on this runtime.");
 }
 
