@@ -56,7 +56,7 @@ async function runPreflight() {
   const env = {
     ...process.env,
     PATH: dirname(process.execPath) + ":" + process.env.PATH,
-    DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache"
+    DSH_REA_NPM_CACHE: "/tmp/dsh-rea-npm-cache-" + process.pid
   };
   return runCommand("node", ["scripts/preflight.mjs"], { env, timeout: 300000 });
 }
@@ -127,8 +127,8 @@ async function main() {
       const preflight = parsePreflight(preflightResult.stdout);
       addLog(`回归结果: ${preflight.tools} tools, ${preflight.catalogKiB} KiB, REA ${preflight.reaVersion}`);
       
-      // 对比 baseline
-      const baseline = { tools: 207, catalogKiB: 214.1, reaVersion: "6.7.0" };
+      // 对比 baseline (6.8.0)
+      const baseline = { tools: 229, catalogKiB: 295.1, reaVersion: "6.8.0" };
       const toolDiff = preflight.tools - baseline.tools;
       const catalogDiff = (preflight.catalogKiB - baseline.catalogKiB).toFixed(1);
       const versionSame = preflight.reaVersion === baseline.reaVersion;

@@ -5,6 +5,7 @@ npm-debug.log*
 
 # Local monitoring and dsh-ops transient state
 .dsh-ops-update-*.lock
+.dsh-ops/
 .monitor/
 logs/
 .post-restart-check.txt

@@ -59,7 +59,7 @@ function parseReport(content) {
 }
 
 function checkBaselineDrift(parsed) {
-    const BASELINE = { tools: 207, catalog: '214.1', rea: '6.7.0' };
+    const BASELINE = { tools: 229, catalog: '295.1', rea: '6.8.0' };
 
     if (!parsed.preflight) return false;
 
@@ -102,7 +102,7 @@ async function main() {
         process.exit(1); // 非零退出码表示有变化，供上层捕获
     } else {
         console.log('✅ 无版本变化，基线一致，保持现状');
-        console.log(`   rea-agents: ${parsed.reaVersion} (锁定 6.7.0)`);
+        console.log(`   rea-agents: ${parsed.reaVersion} (锁定 6.8.0)`);
         console.log(`   dsh-mcp-client: ${parsed.dshVersion} (latest 陈旧，next/alpha 活跃)`);
         process.exit(0);
     }
