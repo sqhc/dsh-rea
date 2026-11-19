@@ -59,7 +59,7 @@ function parseReport(content) {
 }
 
 function checkBaselineDrift(parsed) {
-    const BASELINE = { tools: 229, catalog: '295.1', rea: '6.8.0' };
+    const BASELINE = { tools: 255, catalog: '352.6', rea: '6.9.0' };
 
     if (!parsed.preflight) return false;
 

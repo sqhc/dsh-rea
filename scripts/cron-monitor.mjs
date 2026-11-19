@@ -128,7 +128,7 @@ async function main() {
       addLog(`回归结果: ${preflight.tools} tools, ${preflight.catalogKiB} KiB, REA ${preflight.reaVersion}`);
       
       // 对比 baseline (6.8.0)
-      const baseline = { tools: 229, catalogKiB: 295.1, reaVersion: "6.8.0" };
+      const baseline = { tools: 255, catalogKiB: 352.6, reaVersion: "6.9.0" };
       const toolDiff = preflight.tools - baseline.tools;
       const catalogDiff = (preflight.catalogKiB - baseline.catalogKiB).toFixed(1);
       const versionSame = preflight.reaVersion === baseline.reaVersion;
