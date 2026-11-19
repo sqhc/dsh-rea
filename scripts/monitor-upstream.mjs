@@ -150,11 +150,11 @@ async function generateReport(current, latest, dshClient, preflight, ghRelease) 
   if (preflight.tools) {
     report += `| 指标 | Baseline | 当前 | 变化 |\n`;
     report += `|------|----------|------|------|\n`;
-    report += `| 工具数 | 229 | ${preflight.tools} | ${preflight.tools - 229 >= 0 ? "+" : ""}${preflight.tools - 229} |\n`;
-    report += `| Catalog | 295.1 KiB | ${preflight.catalogKiB} KiB | ${(preflight.catalogKiB - 295.1).toFixed(1)} KiB |\n`;
-    report += `| REA 版本 | 6.8.0 | ${preflight.reaVersion} | ${preflight.reaVersion === "6.8.0" ? "同步" : "变化"} |\n\n`;
+    report += `| 工具数 | 255 | ${preflight.tools} | ${preflight.tools - 255 >= 0 ? "+" : ""}${preflight.tools - 255} |\n`;
+    report += `| Catalog | 352.6 KiB | ${preflight.catalogKiB} KiB | ${(preflight.catalogKiB - 352.6).toFixed(1)} KiB |\n`;
+    report += `| REA 版本 | 6.9.0 | ${preflight.reaVersion} | ${preflight.reaVersion === "6.9.0" ? "同步" : "变化"} |\n\n`;
     
-    if (preflight.tools !== 229 || Math.abs(preflight.catalogKiB - 295.1) > 1 || preflight.reaVersion !== "6.8.0") {
+    if (preflight.tools !== 255 || Math.abs(preflight.catalogKiB - 352.6) > 1 || preflight.reaVersion !== "6.9.0") {
       report += `⚠️ **基线偏移**，需人工评估是否跟随升级\n`;
     } else {
       report += `✅ 基线一致\n`;

@@ -23,7 +23,7 @@ import { mkdir, rm, writeFile } from "node:fs/promises";
 import { homedir } from "node:os";
 import { join } from "node:path";
 
-const REA_VERSION = "6.8.0";
+const REA_VERSION = "6.9.0";
 const TIMEOUT_MS = Number(process.env.DSH_REA_PREFLIGHT_TIMEOUT_MS ?? 240_000);
 
 const nodeVersion = process.versions.node;
