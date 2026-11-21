@@ -55,7 +55,7 @@ The bundle inserts one row into the Harness plugin composition:
         serverName: rea
         transport: stdio
         command: npx
-        args: ['-y', 'rea-agents@6.7.0', 'mcp']
+        args: ['-y', 'rea-agents@6.9.0', 'mcp']
 ```
 
 `@deepseek-ai/dsh-mcp-client` is shipped with DSH. REA is not vendored, forked, or
@@ -76,13 +76,33 @@ rebuilt here — the official npm package runs as a local stdio MCP server.
 
 | REA version | Bundle version | DSH version (verified) | Notes |
 |---|---|---|---|
-| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | **Current**; 229 tools, Node 22.23+/24.22+/26+ (excl. 23/25) |
+| `rea-agents@6.9.0` | `0.3.0` | `0.2.1-rc.2` | **Current**; 255 tools, Node 22.23+/24.22+/26+ (excl. 23/25) |
+| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | 229 tools, Node 22.23+/24.22+/26+ (excl. 23/25) |
 | `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | Baseline; 207 tools, compact input schema, output schema off |
-| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` | `0.2.x` | Patch versions only; pin exact REA version in `cordis.patch.yml` |
+| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` / `0.3.x` | `0.2.x` | Patch versions only; pin exact REA version in `cordis.patch.yml` |
 
 *Always read REA release notes before upgrading. Tool names and schemas are part of the model-facing contract.*
 
 ## Release Notes
+
+### v0.3.0 (2026-11-19) — REA 6.9.0
+
+**Changes**
+- Upstream REA updated from 6.8.0 → 6.9.0
+- Tool count: 229 → **255** (+26 new tools)
+- Catalog size: 295 KiB → **352.6 KiB** (+19%)
+- Node.js engine requirement: 22.23+/24.22+/26+ (excl. 23/25) — unchanged from 6.8.0
+- Bundle size: ~49 MB (similar to 6.8.0)
+
+**Migration**
+1. Update `cordis.patch.yml`: `rea-agents@6.9.0`
+2. Ensure Node.js ≥ 24.22.1 (or 22.23.4 / 26.12.1) on the Harness PATH
+3. Reinstall/reload bundle and run `node scripts/preflight.mjs`
+
+**Known risks**
+- Windows: untested (known limitation)
+- Node 24.21.x will fail preflight — upgrade Node or pin to 22.23.4+
+- Catalog token cost ~90k tokens (compact input); disable bundle when not reverse-engineering
 
 ### v0.2.0 (2026-10-27) — REA 6.8.0
 
@@ -133,7 +153,7 @@ the Harness log if no REA tools appear after a few minutes.
 
 Ask the agent to call `mcp__rea__binary_session` with no arguments. It reports
 the current target/provider/server identity without starting analysis. A healthy
-result identifies the REA server version (`6.7.0`).
+result identifies the REA server version (`6.9.0`).
 
 ## Tool catalog and context cost
 
