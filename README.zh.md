@@ -52,7 +52,7 @@
         serverName: rea
         transport: stdio
         command: npx
-        args: ['-y', 'rea-agents@6.7.0', 'mcp']
+        args: ['-y', 'rea-agents@6.9.0', 'mcp']
 ```
 
 `@deepseek-ai/dsh-mcp-client` 由 DSH 自带。本仓库不复制、不分叉、不重新构建 REA；
@@ -72,13 +72,33 @@
 
 | REA 版本 | Bundle 版本 | DSH 版本（已验证） | 备注 |
 |---|---|---|---|
-| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | **当前**；229 个工具，Node 22.23+/24.22+/26+（排除 23/25） |
+| `rea-agents@6.9.0` | `0.3.0` | `0.2.1-rc.2` | **当前**；255 个工具，Node 22.23+/24.22+/26+（排除 23/25） |
+| `rea-agents@6.8.0` | `0.2.0` | `0.2.1-rc.2` | 229 个工具，Node 22.23+/24.22+/26+（排除 23/25） |
 | `rea-agents@6.7.0` | `0.1.0` | `0.2.1-rc.2` | 基线版本；207 个工具，compact 输入 schema，output schema 关闭 |
-| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` | `0.2.x` | 仅补丁版本；在 `cordis.patch.yml` 中固定确切 REA 版本 |
+| `rea-agents@6.x.x` | `0.1.x` / `0.2.x` / `0.3.x` | `0.2.x` | 仅补丁版本；在 `cordis.patch.yml` 中固定确切 REA 版本 |
 
 *升级前务必阅读 REA 发布说明。工具名和 schema 属于模型可见契约。*
 
 ## 更新日志
+
+### v0.3.0 (2026-11-19) — REA 6.9.0
+
+**变更点**
+- 上游 REA 从 6.8.0 升级到 6.9.0
+- 工具数量：229 → **255**（新增 26 个工具）
+- Catalog 大小：295 KiB → **352.6 KiB**（+19%）
+- Node.js 引擎要求：22.23+/24.22+/26+（排除 23/25）——与 6.8.0 相同
+- 包体积：约 49 MB（与 6.8.0 相当）
+
+**迁移指引**
+1. 更新 `cordis.patch.yml`：`rea-agents@6.9.0`
+2. 确保 Harness PATH 上的 Node.js ≥ 24.22.1（或 22.23.4 / 26.12.1）
+3. 重新安装/重载插件并运行 `node scripts/preflight.mjs`
+
+**已知风险**
+- Windows：未测试（已知限制）
+- Node 24.21.x 会导致 preflight 失败 — 升级 Node 或锁定到 22.23.4+
+- Catalog token 成本约 90k（compact 输入）；不做逆向任务时建议禁用插件
 
 ### v0.2.0 (2026-10-27) — REA 6.8.0
 
@@ -125,7 +145,7 @@ node scripts/preflight.mjs
 ## 验证
 
 让智能体无参数调用 `mcp__rea__binary_session`。它只报告当前目标、provider 和服务器
-身份，不会启动分析。正常结果会显示 REA 服务器版本（`6.7.0`）。
+身份，不会启动分析。正常结果会显示 REA 服务器版本（`6.9.0`）。
 
 ## 工具目录与上下文成本
 
